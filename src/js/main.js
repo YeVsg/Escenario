@@ -14,7 +14,7 @@ const size = 20,
 function startScene() {
     // Scene, Camera, Renderer
     scene  = new THREE.Scene();
-    scene.background = new THREE.Color(0x102c54);
+    scene.background = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/estrellas.png')});
     camera = new THREE.PerspectiveCamera( 75,  // Angulo de Vision (Abajo o Arriba)
                                         window.innerWidth / window.innerHeight, // RelaciÃ³n Aspecto (16:9)
                                         0.1, // Mas Cerca (no renderiza)
@@ -106,41 +106,40 @@ function onWindowResize(){
 
 function figures(){
 
-  var edificio1, edificio2, carretera;
+  var edificio1;
 
   const texture = new THREE.TextureLoader().load('../src/img/facesImage/uv_test_bw_1024.png');
 
-    //edificio1
+   
 
-    var materialedificio1 = [new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventana1.jpg'), side: THREE.DoubleSide },),
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventana1.jpg'), side: THREE.DoubleSide} ),
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide} ), //techo
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide} ), //piso
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventana1.jpg'), side: THREE.DoubleSide} ),
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventana1.jpg'), side: THREE.DoubleSide} ),
+    var materialedificio1 = [new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true }),
+      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
+      /*new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg'), side: THREE.DoubleSide, transparent: true} )*/, //techo
+      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide, transparent: true} ), //piso
+      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
+      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
 ];
 
-    const geometryBox1 = new THREE.BoxGeometry( 3, 6, 3 ); 
+    const geometryBox1 = new THREE.BoxGeometry( 5, 10, 30.5 ); 
     const materialBox1 = new THREE.MeshBasicMaterial( {color: 0x00ff00, map: texture, side: THREE.DoubleSide} ); 
     edificio1 = new THREE.Mesh( geometryBox1, materialedificio1 );
 
-    edificio1.position.x = -5.85;
-    edificio1.position.y = 3.01;
-    edificio1.position.z = 1.7;
+    edificio1.position.x = -12.5;
+    edificio1.position.y = 4.1;
+    edificio1.position.z = 0;
     scene.add( edificio1 );
 
-    //otro edificio con la misma textura que la anterior figulra
 
-    const geometryBox2 = new THREE.BoxGeometry( 3, 8, 3 ); 
+    /*const geometryBox2 = new THREE.BoxGeometry( 3, 8, 3 ); 
     const materialBox2 = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
     edificio2 = new THREE.Mesh( geometryBox2, materialedificio1); 
 
     edificio2.position.x = -5.85;
     edificio2.position.y = 4.01;
     edificio2.position.z = 5.67;
-    scene.add( edificio2 );
+    scene.add( edificio2 );*/
 
-    //terreno  todo el mapa
+    
 
     const geometry = new THREE.PlaneGeometry( 30, 30 );
 
@@ -173,6 +172,29 @@ function figures(){
     planeCalle.rotateX(90*(Math.PI)/180);
     planeCalle.position.y= 0.1;
     scene.add( planeCalle );
+
+
+    var arbol3
+
+    const geoarbol3 = new THREE.ConeGeometry(2, 5, 60); 
+    const materialarbol3 = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    arbol3 = new THREE.Mesh( geoarbol3, materialarbol3); 
+
+    arbol3.position.x = 10.5;
+    arbol3.position.y = 5;
+    arbol3.position.z = 11;
+    scene.add( arbol3 );
+
+    var tronco3
+
+    const geotronco3 = new THREE.BoxGeometry( 1, 3, 1 ); 
+    const materialtronco3 = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    tronco3= new THREE.Mesh( geotronco3, materialtronco3); 
+
+    tronco3.position.x = 10.5;
+    tronco3.position.y = 1.6;
+    tronco3.position.z = 11;
+    scene.add( tronco3 );
     
 
     
