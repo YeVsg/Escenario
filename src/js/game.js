@@ -26,5 +26,30 @@ function createUI(){
         mylight.intensity = intensityGet;
      });
 
-}
+   }
+
+     function loadObjMtl(){
+      // general Path, nameObj, nameMTL
+      var generalPath = "../obj/otgw/";
+      var fileObj = "OvertheGardenPJobj.obj";
+      var fileMtl = "OvertheGardenPJobj.mtl";
+
+      var mtlLoader = new THREE.MTLLoader();
+      mtlLoader.setTexturePath(generalPath);
+      mtlLoader.setPath(generalPath);
+      mtlLoader.load(fileMtl, function(materials){
+         materials.preload();
+
+         var objLoader = new THREE.OBJLoader();
+         objLoader.setMaterials(materials);
+         objLoader.setPath(generalPath);
+         objLoader.load(fileObj, function(object){
+            scene.add(object);
+            object.scale.set(1,1,1);
+            
+         });
+      });
+     }
+
+
 

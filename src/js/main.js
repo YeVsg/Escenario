@@ -48,6 +48,8 @@ function startScene() {
 
     createUI();
 
+    loadObjMtl();
+
 }
 
 
