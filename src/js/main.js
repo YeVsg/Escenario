@@ -37,12 +37,16 @@ function startScene() {
     
 
     //gestiona la creacion del tipo de luz
-    
-    createlight('directionalLight');
+
+    createlight('ambient');
+
+    // createlight('directionalLight');
 
     figures();
-
+    
     animate();
+
+    createUI();
 
 }
 
@@ -57,7 +61,7 @@ function createlight(typeLight){
       
     case 'ambient':
     
-      mylight = new THREE.AmbientLight( 0xFFFFFF, 90000000000000); // soft white light
+      mylight = new THREE.AmbientLight( 0xFFFFFF, 1); // soft white light
       scene.add( mylight );
     break;
 
@@ -112,16 +116,16 @@ function figures(){
 
    
 
-    var materialedificio1 = [/*new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true })*/,
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
-      //new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg'), side: THREE.DoubleSide, transparent: true} ), //techo
-      //new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide, transparent: true} ), //piso
-      //new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
-      //new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
+    var materialedificio1 = [/*new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true })*/,
+      new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
+      //new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg'), side: THREE.DoubleSide, transparent: true} ), //techo
+      //new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide, transparent: true} ), //piso
+      //new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
+      //new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/arboles.png'), side: THREE.DoubleSide, transparent: true} ),
 ];
 
     const geometryBox1 = new THREE.BoxGeometry( 5, 10, 30.5 ); 
-    const materialBox1 = new THREE.MeshBasicMaterial( {color: 0x00ff00, map: texture, side: THREE.DoubleSide} ); 
+    const materialBox1 = new THREE.MeshStandardMaterial( {color: 0x00ff00, map: texture, side: THREE.DoubleSide} ); 
     edificio1 = new THREE.Mesh( geometryBox1, materialedificio1 );
 
     edificio1.position.x = -12.5;
@@ -141,7 +145,7 @@ function figures(){
 
     const texturePlano = new THREE.TextureLoader().load('../src/img/facesimage/grass.jpeg');
 
-    const material = new THREE.MeshBasicMaterial( { 
+    const material = new THREE.MeshStandardMaterial( { 
                                                     side: THREE.DoubleSide,
                                                     map: texturePlano, 
                                                     color: 0x7d7f7d, // White color, ensuring no color multiplication
@@ -158,7 +162,7 @@ function figures(){
 
     const textureCalle = new THREE.TextureLoader().load('../src/img/facesimage/carretera.jpeg');
 
-    const materialCalle = new THREE.MeshBasicMaterial( { 
+    const materialCalle = new THREE.MeshStandardMaterial( { 
       side: THREE.DoubleSide,
       map: textureCalle, 
       color: 0x7d7f7d, 
@@ -172,7 +176,7 @@ function figures(){
     var arbol6
 
     const geoarbol6 = new THREE.ConeGeometry(2, 5, 60); 
-    const materialarbol6 = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    const materialarbol6 = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
     arbol6 = new THREE.Mesh( geoarbol6, materialarbol6); 
 
     arbol6.position.x = -10.5;
@@ -183,7 +187,7 @@ function figures(){
     var tronco6
 
     const geotronco6 = new THREE.BoxGeometry( 0.5, 3, 0.5 ); 
-    const materialtronco6 = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    const materialtronco6 = new THREE.MeshStandardMaterial( {color: 0x452608} ); 
     tronco6= new THREE.Mesh( geotronco6, materialtronco6); 
 
     tronco6.position.x = -10.5;
@@ -194,7 +198,7 @@ function figures(){
     var arbol5
 
     const geoarbol5 = new THREE.ConeGeometry(2, 5, 60); 
-    const materialarbol5 = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    const materialarbol5 = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
     arbol5 = new THREE.Mesh( geoarbol5, materialarbol5); 
 
     arbol5.position.x = -10.5;
@@ -205,7 +209,7 @@ function figures(){
     var tronco5
 
     const geotronco5 = new THREE.BoxGeometry( 0.5, 3, 0.5 ); 
-    const materialtronco5 = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    const materialtronco5 = new THREE.MeshStandardMaterial( {color: 0x452608} ); 
     tronco5= new THREE.Mesh( geotronco5, materialtronco5); 
 
     tronco5.position.x = -10.5;
@@ -216,7 +220,7 @@ function figures(){
     var arbol4
 
     const geoarbol4 = new THREE.ConeGeometry(3, 7, 60); 
-    const materialarbol4 = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    const materialarbol4 = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
     arbol4 = new THREE.Mesh( geoarbol4, materialarbol4); 
 
     arbol4.position.x = -10.1;
@@ -227,7 +231,7 @@ function figures(){
     var tronco4
 
     const geotronco4 = new THREE.BoxGeometry( 1, 2, 1 ); 
-    const materialtronco4 = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    const materialtronco4 = new THREE.MeshStandardMaterial( {color: 0x452608} ); 
     tronco4= new THREE.Mesh( geotronco4, materialtronco4); 
 
     tronco4.position.x = -10.1;
@@ -238,7 +242,7 @@ function figures(){
     var arbol3
 
     const geoarbol3 = new THREE.ConeGeometry(5, 7, 60); 
-    const materialarbol3 = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    const materialarbol3 = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
     arbol3 = new THREE.Mesh( geoarbol3, materialarbol3); 
 
     arbol3.position.x = 10.1;
@@ -249,7 +253,7 @@ function figures(){
     var tronco3
 
     const geotronco3 = new THREE.BoxGeometry( 1, 2, 1 ); 
-    const materialtronco3 = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    const materialtronco3 = new THREE.MeshStandardMaterial( {color: 0x452608} ); 
     tronco3= new THREE.Mesh( geotronco3, materialtronco3); 
 
     tronco3.position.x = 10.1;
@@ -261,7 +265,7 @@ function figures(){
     var arbol2
 
     const geoarbol2 = new THREE.ConeGeometry(3, 7, 60); 
-    const materialarbol2 = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    const materialarbol2 = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
     arbol2 = new THREE.Mesh( geoarbol2, materialarbol2); 
 
     arbol2.position.x = 10.1;
@@ -272,7 +276,7 @@ function figures(){
     var tronco2
 
     const geotronco2 = new THREE.BoxGeometry( 1, 2, 1 ); 
-    const materialtronco2 = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    const materialtronco2 = new THREE.MeshStandardMaterial( {color: 0x452608} ); 
     tronco2 = new THREE.Mesh( geotronco2, materialtronco2); 
 
     tronco2.position.x = 10.1;
@@ -287,7 +291,7 @@ function figures(){
     var tronco
 
     const geotronco = new THREE.BoxGeometry( 1, 2, 1 ); 
-    const materialtronco = new THREE.MeshBasicMaterial( {color: 0x452608} ); 
+    const materialtronco = new THREE.MeshStandardMaterial( {color: 0x452608} ); 
     tronco = new THREE.Mesh( geotronco, materialtronco); 
 
     tronco.position.x = 10.1;
@@ -304,7 +308,7 @@ function figures(){
     var arbol
 
     const geoarbol = new THREE.ConeGeometry(5, 7, 60); 
-    const materialarbol = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
+    const materialarbol = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/arbol.jpg')}); 
     arbol = new THREE.Mesh( geoarbol, materialarbol); 
 
     arbol.position.x = 10.1;
@@ -317,12 +321,12 @@ function figures(){
     var edificio3;
 
     const geoEdificio3 = new THREE.BoxGeometry( 8, 10, 9.5 ); 
-    const materialEdificio3 = [new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/ladocasaAbnd.jpg'), side: THREE.DoubleSide },),
-        new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/casaAbandonada.jpeg'), side: THREE.DoubleSide} ), //frontal
-        new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/techocasaAbnd.jpg'), side: THREE.DoubleSide} ), //techo
-        new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide} ), //piso
-        new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/ladocasaAbnd.jpg'), side: THREE.DoubleSide} ),
-        new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/ladocasaAbnd.jpg'), side: THREE.DoubleSide} ), //lado izquierdo
+    const materialEdificio3 = [new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/ladocasaAbnd.jpg'), side: THREE.DoubleSide },),
+        new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/casaAbandonada.jpeg'), side: THREE.DoubleSide} ), //frontal
+        new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/techocasaAbnd.jpg'), side: THREE.DoubleSide} ), //techo
+        new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/edificioventanatecho1.jpg'), side: THREE.DoubleSide} ), //piso
+        new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/ladocasaAbnd.jpg'), side: THREE.DoubleSide} ),
+        new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/ladocasaAbnd.jpg'), side: THREE.DoubleSide} ), //lado izquierdo
   ]; 
     edificio3 = new THREE.Mesh( geoEdificio3, materialEdificio3); 
 
@@ -332,12 +336,12 @@ function figures(){
     
     scene.add( edificio3 );
 
-    var materialedificio2 = [new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/frente.png'), side: THREE.DoubleSide },),
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/lados.jpg'), side: THREE.DoubleSide} ),
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/techocasaAbnd.jpg'), side: THREE.DoubleSide} ), //techo
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/techo.jpeg'), side: THREE.DoubleSide} ), //piso
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/lados.jpg'), side: THREE.DoubleSide} ),
-      new THREE.MeshBasicMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/lados.jpg'), side: THREE.DoubleSide} ),
+    var materialedificio2 = [new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/frente.png'), side: THREE.DoubleSide },),
+      new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/lados.jpg'), side: THREE.DoubleSide} ),
+      new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/techocasaAbnd.jpg'), side: THREE.DoubleSide} ), //techo
+      new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/techo.jpeg'), side: THREE.DoubleSide} ), //piso
+      new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/lados.jpg'), side: THREE.DoubleSide} ),
+      new THREE.MeshStandardMaterial( {map: new THREE.TextureLoader().load('../src/img/facesimage/lados.jpg'), side: THREE.DoubleSide} ),
   ];
   
     const edf2 = new THREE.BoxGeometry( 7, 7, 7 ); 
@@ -351,7 +355,7 @@ function figures(){
     var luna;
 
     const geoluna = new THREE.SphereGeometry( 6, 32, 20 ); 
-    const materialLuna = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/luna.jpg')}); 
+    const materialLuna = new THREE.MeshStandardMaterial({map: new THREE.TextureLoader().load('../src/img/facesimage/luna.jpg')}); 
     luna = new THREE.Mesh( geoluna, materialLuna ); 
 
     luna.position.x = -20;
