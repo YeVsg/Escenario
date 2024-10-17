@@ -43,7 +43,7 @@ function createUI(){
       // general Path, nameObj, nameMTL
       var generalPath = "../obj/modelos/";
       var fileObj, 
-      fileMtl;
+          fileMtl;
 
       switch (selectedModel) {
          case "Mujer":
