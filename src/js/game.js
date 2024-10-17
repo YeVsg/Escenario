@@ -1,17 +1,28 @@
+var objetoActual;
+
 function createUI(){
     var gui = new dat.GUI();
     var param = {
         a: "OBJ",
         b: "#FF00FF",
-        c: 1
+        c: 1,
+        scale: 1  
     };
 
     var g = gui.addFolder('Geometry');
-    var player = g.add(param, 'a',["Mujer","Hombre", "Luigi", "Mario", "Otgw"]).name("Modelos 3D");
+    var player = g.add(param, 'a',["Mujer","Hombre", "Luigi", "Mario", "Otgw", "Gregory"]).name("Modelos 3D");
 
     player.onChange(function(myPlayer){
-      console.log(myPlayer);
+      loadObjMtl(myPlayer, param.scale);
     });
+
+    var scaleControl = g.add(param, 'scale').min(0.03).max(5).step(0.01).name("Escala");
+    scaleControl.onChange(function(newScale) {
+      if (objetoActual) {
+         
+         objetoActual.scale.set(newScale, newScale, newScale);
+     }
+      });
 
     var l = gui.addFolder('Luces');
     var colorLight = l.addColor(param, 'b').name("Color de luz");
@@ -28,11 +39,41 @@ function createUI(){
 
    }
 
-     function loadObjMtl(){
+     function loadObjMtl(selectedModel, scale){
       // general Path, nameObj, nameMTL
-      var generalPath = "../obj/otgw/";
-      var fileObj = "OvertheGardenPJobj.obj";
-      var fileMtl = "OvertheGardenPJobj.mtl";
+      var generalPath = "../obj/modelos/";
+      var fileObj, 
+      fileMtl;
+
+      switch (selectedModel) {
+         case "Mujer":
+             fileObj = "female02.obj";
+             fileMtl = "female02.mtl";
+             break;
+         case "Hombre":
+             fileObj = "male02.obj";
+             fileMtl = "male02.mtl";
+             break;
+         case "Luigi":
+             fileObj = "Luigi_obj.obj";
+             fileMtl = "Luigi_obj.mtl";
+             break;
+         case "Mario":
+             fileObj = "mario_obj.obj";
+             fileMtl = "mario_obj.mtl";
+             break;
+         case "Otgw":
+             fileObj = "OvertheGardenPJobj.obj";
+             fileMtl = "OvertheGardenPJobj.mtl";
+             break;
+         case "Gregory":
+             fileObj = "personaje.obj";
+             fileMtl = "personaje.mtl";
+             break;
+         default:
+             console.error("Modelo no reconocido");
+             return;
+     }
 
       var mtlLoader = new THREE.MTLLoader();
       mtlLoader.setTexturePath(generalPath);
@@ -44,9 +85,12 @@ function createUI(){
          objLoader.setMaterials(materials);
          objLoader.setPath(generalPath);
          objLoader.load(fileObj, function(object){
+            if (objetoActual) {
+               scene.remove(objetoActual); 
+           }
             scene.add(object);
-            object.scale.set(1,1,1);
-            
+            object.scale.set(scale, scale, scale);
+            objetoActual = object;
          });
       });
      }
